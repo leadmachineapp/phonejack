@@ -1,4 +1,4 @@
-module Numberjack
+module Phonejack
   module ClassMethods
     attr_accessor :override_file, :default_format_string
     attr_reader :default_format_pattern
@@ -8,7 +8,7 @@ module Numberjack
     end
 
     def parse(number, country = detect_country(number))
-      Numberjack::Number.new(sanitize(number), country)
+      Phonejack::Number.new(sanitize(number), country)
     end
 
     def valid?(number, country = detect_country(number), keys = [])

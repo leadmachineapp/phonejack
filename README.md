@@ -1,6 +1,6 @@
 # What is it?
 
-Numberjack is global phone number validation gem based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) library.
+Phonejack is global phone number validation gem based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) library.
 
 This was forked from https://github.com/mobi/telephone_number as the chosen gem name (telephone_number), and class name (TelephoneNumber) were too generic and clashed with existing model names
 
@@ -9,7 +9,7 @@ This was forked from https://github.com/mobi/telephone_number as the chosen gem 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'numberjack'
+gem 'phonejack'
 ```
 
 And then execute:
@@ -18,11 +18,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install numberjack
+    $ gem install phonejack
 
 ## Rails Validation
 
-`validates :my_attribute_name, numberjack: {country: proc{|record| record.country}, types: [:fixed_line, :mobile, etc]}`
+`validates :my_attribute_name, phonejack: {country: proc{|record| record.country}, types: [:fixed_line, :mobile, etc]}`
 
 #### Valid Phone Types
 - `:area_code_optional`
@@ -45,12 +45,12 @@ Or install it yourself as:
 
 ## Manual Usage
 
-You can obtain a `Numberjack` object by calling:
+You can obtain a `Phonejack` object by calling:
 
 ```
-phone_object = Numberjack.parse("3175082237", :us) ==>
+phone_object = Phonejack.parse("3175082237", :us) ==>
 
-#<Numberjack::Number:0x007fe3bc146cf0
+#<Phonejack::Number:0x007fe3bc146cf0
   @country=:US,
   @e164_number="13175083348",
   @national_number="3175083348",
@@ -94,7 +94,7 @@ After that you have the following instance methods available to you.
 
   ```
   phone_object.country ===>
-   #<Numberjack::Country:0x007fb976267410
+   #<Phonejack::Country:0x007fb976267410
    @country_code="1",
    @country_id="US",
    ...
@@ -106,38 +106,38 @@ After that you have the following instance methods available to you.
 
   - #### `parse`
 
-    Returns a Numberjack object.
+    Returns a Phonejack object.
 
-    `Numberjack.parse("3175082237", :US)`
+    `Phonejack.parse("3175082237", :US)`
 
     If you pass an E164 formatted number, we will determine the country on the fly.
 
-    `Numberjack.parse("+13175082237")`
+    `Phonejack.parse("+13175082237")`
 
   - #### `valid?`
 
     Returns boolean value indicating whether or not a particular number is valid.
 
-    `Numberjack.valid?("3175082237", :US) ==> true`
+    `Phonejack.valid?("3175082237", :US) ==> true`
 
     If you are looking to validate against a specific set of keys, you can pass in an array of keys
 
     ```
-    Numberjack.valid?("3175082237", :US, [:mobile, :fixed_line]) ==> true
-    Numberjack.valid?("3175082237", :US, [:toll_free]) ==> false
+    Phonejack.valid?("3175082237", :US, [:mobile, :fixed_line]) ==> true
+    Phonejack.valid?("3175082237", :US, [:toll_free]) ==> false
     ```
 
   - #### `invalid?`
 
     Returns boolean value indicating whether or not a particular number is invalid.
 
-    `Numberjack.invalid?("3175082237", :US) ==> false`
+    `Phonejack.invalid?("3175082237", :US) ==> false`
 
     If you are looking to invalidate against a specific set of keys, you can pass in an array of keys
 
     ```
-    Numberjack.invalid?("3175082237", :US, [:mobile, :fixed_line]) ==> false
-    Numberjack.invalid?("3175082237", :US, [:toll_free]) ==> true
+    Phonejack.invalid?("3175082237", :US, [:mobile, :fixed_line]) ==> false
+    Phonejack.invalid?("3175082237", :US, [:toll_free]) ==> true
     ```
 
 
@@ -150,24 +150,24 @@ In the event that you need to override the data that Google is providing, you ca
 To generate a serialized override file:
 
     ruby bin/console
-    Numberjack.generate_override_file("/path/to/file")
+    Phonejack.generate_override_file("/path/to/file")
 
 In this instance, `/path/to/file` represents an xml file that has your custom data in the same structure that Google's data is in.
 
 You can set the override file with:
 
-    Numberjack.override_file = "/path/to_file.dat"
+    Phonejack.override_file = "/path/to_file.dat"
 
 ### Default Number Pattern
 
-If Numberjack is passed an invalid number and then asked to format that number, it will simply return an unformatted string of the originally passed number. This is because formatting rules will not be found for invalid numbers. If this is unacceptable, you can set a `default_format_pattern` and `default_format_string` that Numberjack will use attempt to format invalid numbers.
+If Phonejack is passed an invalid number and then asked to format that number, it will simply return an unformatted string of the originally passed number. This is because formatting rules will not be found for invalid numbers. If this is unacceptable, you can set a `default_format_pattern` and `default_format_string` that Phonejack will use attempt to format invalid numbers.
 
 ```
-Numberjack.default_format_pattern = "(\\d{3})(\\d{3})(\\d*)"
-Numberjack.default_format_string = "($1) $2-$3"
+Phonejack.default_format_pattern = "(\\d{3})(\\d{3})(\\d*)"
+Phonejack.default_format_string = "($1) $2-$3"
 
 invalid_number = "1111111111"
-phone_object = Numberjack.parse(invalid_number, :US)
+phone_object = Phonejack.parse(invalid_number, :US)
 phone_object.national_number ==> "(111) 111-1111"
 ```
 
@@ -176,7 +176,7 @@ phone_object.national_number ==> "(111) 111-1111"
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-While developing new functionality, you may want to test against specific phone numbers. In order to do this, add the number to `lib/numberjack/test_data_generator.rb` and then run `rake data:test:import`. This command will reach out to the demo application provided by Google and pull the correct formats to test against.
+While developing new functionality, you may want to test against specific phone numbers. In order to do this, add the number to `lib/phonejack/test_data_generator.rb` and then run `rake data:test:import`. This command will reach out to the demo application provided by Google and pull the correct formats to test against.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 

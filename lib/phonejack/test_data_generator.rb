@@ -1,4 +1,4 @@
-module Numberjack
+module Phonejack
   require 'nokogiri'
   require 'httparty'
   require 'yaml'

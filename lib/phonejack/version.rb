@@ -1,3 +1,3 @@
-module Numberjack
+module Phonejack
   VERSION = "1.2.0"
 end

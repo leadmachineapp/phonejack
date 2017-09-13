@@ -1,4 +1,4 @@
-module Numberjack
+module Phonejack
   class NumberValidation
     attr_reader :name, :pattern
 

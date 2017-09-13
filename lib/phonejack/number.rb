@@ -1,4 +1,4 @@
-module Numberjack
+module Phonejack
   class Number
     extend Forwardable
 

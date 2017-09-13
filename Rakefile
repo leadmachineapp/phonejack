@@ -1,6 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
-require 'numberjack'
+require 'phonejack'
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
@@ -14,13 +14,13 @@ task :default => :test
 namespace :data do
   namespace :main do
     task :import  do
-      Numberjack::DataImporter.new(File.expand_path('data/telephone_number_data_file.xml')).import!
+      Phonejack::DataImporter.new(File.expand_path('data/telephone_number_data_file.xml')).import!
     end
   end
 
   namespace :test do
     task :import  do
-      Numberjack::TestDataGenerator.import!
+      Phonejack::TestDataGenerator.import!
     end
   end
 end
