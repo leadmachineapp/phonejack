@@ -1,4 +1,4 @@
-module TelephoneNumberParser
+module Numberjack
   require 'nokogiri'
   class DataImporter
     attr_reader :data, :file, :override

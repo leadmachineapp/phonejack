@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'telephone_number_parser/version'
+require 'numberjack/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'telephone_number_parser'
-  spec.version       = TelephoneNumberParser::VERSION
+  spec.name          = 'numberjack'
+  spec.version       = Numberjack::VERSION
   spec.author        = 'LeadMachine (forked from MOBI Wireless Management)'
   spec.email         = ['jakcharlton@gmail.com']
   spec.summary       = 'Phone number validation forked from MOBI Wireless Management'
-  spec.homepage      = 'https://github.com/leamachineapp/telephone_number_parser'
+  spec.homepage      = 'https://github.com/leamachineapp/numberjack'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

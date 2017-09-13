@@ -1,4 +1,4 @@
-module TelephoneNumberParser
+module Numberjack
   class Formatter
 
     attr_reader :normalized_number, :country, :valid, :original_number
@@ -47,12 +47,12 @@ module TelephoneNumberParser
         formatted_string.sub!(captures[0], national_prefix_string)
       end
 
-      formatted ? formatted_string : TelephoneNumberParser.sanitize(formatted_string)
+      formatted ? formatted_string : Numberjack.sanitize(formatted_string)
     end
 
     def build_e164_number(formatted: true)
       formatted_string = "+#{country.country_code}#{normalized_number}"
-      formatted ? formatted_string : TelephoneNumberParser.sanitize(formatted_string)
+      formatted ? formatted_string : Numberjack.sanitize(formatted_string)
     end
 
     def build_international_number(formatted: true)
@@ -60,7 +60,7 @@ module TelephoneNumberParser
       captures = normalized_number.match(number_format.pattern).captures
       key = number_format.intl_format || number_format.format
       formatted_string = "+#{country.country_code} #{format(ruby_format_string(key), *captures)}"
-      formatted ? formatted_string : TelephoneNumberParser.sanitize(formatted_string)
+      formatted ? formatted_string : Numberjack.sanitize(formatted_string)
     end
 
     def ruby_format_string(format_string)
@@ -68,9 +68,9 @@ module TelephoneNumberParser
     end
 
     def original_or_default
-      return original_number unless TelephoneNumberParser.default_format_string && TelephoneNumberParser.default_format_pattern
-      captures = original_number.match(TelephoneNumberParser.default_format_pattern).captures
-      format(ruby_format_string(TelephoneNumberParser.default_format_string), *captures)
+      return original_number unless Numberjack.default_format_string && Numberjack.default_format_pattern
+      captures = original_number.match(Numberjack.default_format_pattern).captures
+      format(ruby_format_string(Numberjack.default_format_string), *captures)
     end
   end
 end

@@ -14,7 +14,7 @@ require 'minitest/autorun'
 require 'minitest/focus'
 require 'pry'
 require 'yaml'
-require 'telephone_number_parser'
+require 'numberjack'
 
-TelephoneNumberParser.override_file = 'test/telephone_number_data_override_file.dat'
+Numberjack.override_file = 'test/telephone_number_data_override_file.dat'
 

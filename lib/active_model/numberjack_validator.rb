@@ -1,9 +1,9 @@
-class TelephoneNumberValidator < ActiveModel::EachValidator
+class NumberjackValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     country = options[:country].call(record) if options.key?(:country)
     valid_types = options.fetch(:types, [])
     args = [value, country, valid_types]
 
-    record.errors.add(attribute, :invalid) if TelephoneNumberParser.invalid?(*args)
+    record.errors.add(attribute, :invalid) if Numberjack.invalid?(*args)
   end
 end

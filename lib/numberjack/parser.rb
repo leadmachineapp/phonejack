@@ -1,4 +1,4 @@
-module TelephoneNumberParser
+module Numberjack
   class Parser
     attr_reader :original_number, :normalized_number, :country
 

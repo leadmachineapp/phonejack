@@ -1,4 +1,4 @@
-module TelephoneNumberParser
+module Numberjack
   module ClassMethods
     attr_accessor :override_file, :default_format_string
     attr_reader :default_format_pattern
@@ -8,7 +8,7 @@ module TelephoneNumberParser
     end
 
     def parse(number, country = detect_country(number))
-      TelephoneNumberParser::Number.new(sanitize(number), country)
+      Numberjack::Number.new(sanitize(number), country)
     end
 
     def valid?(number, country = detect_country(number), keys = [])

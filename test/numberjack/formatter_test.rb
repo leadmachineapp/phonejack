@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'ostruct'
 
-module TelephoneNumberParser
+module Numberjack
   class FormatterTest < Minitest::Test
     def setup
       @valid_phone_obj = OpenStruct.new(country: Country.find(:us),
@@ -16,31 +16,31 @@ module TelephoneNumberParser
     end
 
     def test_national_number_if_valid
-      formatter = TelephoneNumberParser::Formatter.new(@valid_phone_obj)
+      formatter = Numberjack::Formatter.new(@valid_phone_obj)
       assert_equal "(317) 508-2203", formatter.national_number
       assert_equal "3175082203", formatter.national_number(formatted: false)
     end
 
     def test_national_number_if_invalid
-      formatter = TelephoneNumberParser::Formatter.new(@invalid_phone_obj)
+      formatter = Numberjack::Formatter.new(@invalid_phone_obj)
       assert_equal "13175082203", formatter.national_number
       assert_equal "13175082203", formatter.national_number(formatted: false)
     end
 
     def test_international_number_if_valid
-      formatter = TelephoneNumberParser::Formatter.new(@valid_phone_obj)
+      formatter = Numberjack::Formatter.new(@valid_phone_obj)
       assert_equal "+1 317-508-2203", formatter.international_number
       assert_equal "13175082203", formatter.international_number(formatted: false)
     end
 
     def test_international_number_if_invalid
-      formatter = TelephoneNumberParser::Formatter.new(@invalid_phone_obj)
+      formatter = Numberjack::Formatter.new(@invalid_phone_obj)
       assert_equal "13175082203", formatter.international_number
       assert_equal "13175082203", formatter.international_number(formatted: false)
     end
 
     def test_e164_number_if_valid
-      formatter = TelephoneNumberParser::Formatter.new(@valid_phone_obj)
+      formatter = Numberjack::Formatter.new(@valid_phone_obj)
       assert_equal "+13175082203", formatter.e164_number
       assert_equal "13175082203", formatter.e164_number(formatted: false)
     end
@@ -51,7 +51,7 @@ module TelephoneNumberParser
                                  normalized_number: "3175082203",
                                  original_number: "3175082203")
 
-      formatter = TelephoneNumberParser::Formatter.new(phone_obj)
+      formatter = Numberjack::Formatter.new(phone_obj)
       assert_equal "3175082203", formatter.e164_number
       assert_equal "3175082203", formatter.e164_number(formatted: false)
     end

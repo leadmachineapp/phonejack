@@ -13,15 +13,15 @@ class ModelTest < Minitest::Test
   end
 
   class BasicValidation < BasicModel
-    validates :phone_number, telephone_number: { country: proc{ |record| record.country } }
+    validates :phone_number, numberjack: { country: proc{ |record| record.country } }
   end
 
   class ValidationWithTypes < BasicModel
-    validates :phone_number, telephone_number: { country: proc{ |record| record.country }, types: [:toll_free] }
+    validates :phone_number, numberjack: { country: proc{ |record| record.country }, types: [:toll_free] }
   end
 
   class AllowBlankOption < BasicModel
-    validates :phone_number, telephone_number: { country: proc{ |record| record.country } }, allow_blank: true
+    validates :phone_number, numberjack: { country: proc{ |record| record.country } }, allow_blank: true
   end
 
   def test_basic_correctly_validates

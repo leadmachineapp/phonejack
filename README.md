@@ -1,13 +1,13 @@
 # What is it?
 
-TelephoneNumberParser is global phone number validation gem based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) library.
+Numberjack is global phone number validation gem based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) library.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'telephone_number_parser'
+gem 'numberjack'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install telephone_number_parser
+    $ gem install numberjack
 
 ## Rails Validation
 
@@ -43,12 +43,12 @@ Or install it yourself as:
 
 ## Manual Usage
 
-You can obtain a `TelephoneNumberParser` object by calling:
+You can obtain a `Numberjack` object by calling:
 
 ```
-phone_object = TelephoneNumberParser.parse("3175082237", :us) ==>
+phone_object = Numberjack.parse("3175082237", :us) ==>
 
-#<TelephoneNumberParser::Number:0x007fe3bc146cf0
+#<Numberjack::Number:0x007fe3bc146cf0
   @country=:US,
   @e164_number="13175083348",
   @national_number="3175083348",
@@ -92,7 +92,7 @@ After that you have the following instance methods available to you.
 
   ```
   phone_object.country ===>
-   #<TelephoneNumberParser::Country:0x007fb976267410
+   #<Numberjack::Country:0x007fb976267410
    @country_code="1",
    @country_id="US",
    ...
@@ -104,38 +104,38 @@ After that you have the following instance methods available to you.
 
   - #### `parse`
 
-    Returns a TelephoneNumberParser object.
+    Returns a Numberjack object.
 
-    `TelephoneNumberParser.parse("3175082237", :US)`
+    `Numberjack.parse("3175082237", :US)`
 
     If you pass an E164 formatted number, we will determine the country on the fly.
 
-    `TelephoneNumberParser.parse("+13175082237")`
+    `Numberjack.parse("+13175082237")`
 
   - #### `valid?`
 
     Returns boolean value indicating whether or not a particular number is valid.
 
-    `TelephoneNumberParser.valid?("3175082237", :US) ==> true`
+    `Numberjack.valid?("3175082237", :US) ==> true`
 
     If you are looking to validate against a specific set of keys, you can pass in an array of keys
 
     ```
-    TelephoneNumberParser.valid?("3175082237", :US, [:mobile, :fixed_line]) ==> true
-    TelephoneNumberParser.valid?("3175082237", :US, [:toll_free]) ==> false
+    Numberjack.valid?("3175082237", :US, [:mobile, :fixed_line]) ==> true
+    Numberjack.valid?("3175082237", :US, [:toll_free]) ==> false
     ```
 
   - #### `invalid?`
 
     Returns boolean value indicating whether or not a particular number is invalid.
 
-    `TelephoneNumberParser.invalid?("3175082237", :US) ==> false`
+    `Numberjack.invalid?("3175082237", :US) ==> false`
 
     If you are looking to invalidate against a specific set of keys, you can pass in an array of keys
 
     ```
-    TelephoneNumberParser.invalid?("3175082237", :US, [:mobile, :fixed_line]) ==> false
-    TelephoneNumberParser.invalid?("3175082237", :US, [:toll_free]) ==> true
+    Numberjack.invalid?("3175082237", :US, [:mobile, :fixed_line]) ==> false
+    Numberjack.invalid?("3175082237", :US, [:toll_free]) ==> true
     ```
 
 
@@ -148,24 +148,24 @@ In the event that you need to override the data that Google is providing, you ca
 To generate a serialized override file:
 
     ruby bin/console
-    TelephoneNumberParser.generate_override_file("/path/to/file")
+    Numberjack.generate_override_file("/path/to/file")
 
 In this instance, `/path/to/file` represents an xml file that has your custom data in the same structure that Google's data is in.
 
 You can set the override file with:
 
-    TelephoneNumberParser.override_file = "/path/to_file.dat"
+    Numberjack.override_file = "/path/to_file.dat"
 
 ### Default Number Pattern
 
-If TelephoneNumberParser is passed an invalid number and then asked to format that number, it will simply return an unformatted string of the originally passed number. This is because formatting rules will not be found for invalid numbers. If this is unacceptable, you can set a `default_format_pattern` and `default_format_string` that TelephoneNumberParser will use attempt to format invalid numbers.
+If Numberjack is passed an invalid number and then asked to format that number, it will simply return an unformatted string of the originally passed number. This is because formatting rules will not be found for invalid numbers. If this is unacceptable, you can set a `default_format_pattern` and `default_format_string` that Numberjack will use attempt to format invalid numbers.
 
 ```
-TelephoneNumberParser.default_format_pattern = "(\\d{3})(\\d{3})(\\d*)"
-TelephoneNumberParser.default_format_string = "($1) $2-$3"
+Numberjack.default_format_pattern = "(\\d{3})(\\d{3})(\\d*)"
+Numberjack.default_format_string = "($1) $2-$3"
 
 invalid_number = "1111111111"
-phone_object = TelephoneNumberParser.parse(invalid_number, :US)
+phone_object = Numberjack.parse(invalid_number, :US)
 phone_object.national_number ==> "(111) 111-1111"
 ```
 
@@ -174,7 +174,7 @@ phone_object.national_number ==> "(111) 111-1111"
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-While developing new functionality, you may want to test against specific phone numbers. In order to do this, add the number to `lib/telephone_number_parser/test_data_generator.rb` and then run `rake data:test:import`. This command will reach out to the demo application provided by Google and pull the correct formats to test against.
+While developing new functionality, you may want to test against specific phone numbers. In order to do this, add the number to `lib/numberjack/test_data_generator.rb` and then run `rake data:test:import`. This command will reach out to the demo application provided by Google and pull the correct formats to test against.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
