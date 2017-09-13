@@ -2,6 +2,8 @@
 
 Numberjack is global phone number validation gem based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) library.
 
+This was forked from https://github.com/mobi/telephone_number as the chosen gem name (telephone_number), and class name (TelephoneNumber) were too generic and clashed with existing model names
+
 ## Installation
 
 Add this line to your application's Gemfile:
