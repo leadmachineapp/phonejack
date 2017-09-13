@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   class Parser
     attr_reader :original_number, :normalized_number, :country
 

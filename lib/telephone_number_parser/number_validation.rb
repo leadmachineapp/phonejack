@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   class NumberValidation
     attr_reader :name, :pattern
 

@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   require 'nokogiri'
   require 'httparty'
   require 'yaml'

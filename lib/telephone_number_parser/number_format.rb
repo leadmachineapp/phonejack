@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   class NumberFormat
 
     attr_reader :pattern, :leading_digits, :format, :national_prefix_formatting_rule, :intl_format

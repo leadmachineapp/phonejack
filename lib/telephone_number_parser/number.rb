@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   class Number
     extend Forwardable
 

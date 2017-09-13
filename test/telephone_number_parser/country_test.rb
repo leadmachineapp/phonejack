@@ -1,6 +1,6 @@
 require "test_helper"
 
-module TelephoneNumber
+module TelephoneNumberParser
   class CountryTest < Minitest::Test
     def test_initialize_sets_correct_attributes
       country = Country.new(init_attrs)

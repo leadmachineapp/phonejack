@@ -1,4 +1,4 @@
-module TelephoneNumber
+module TelephoneNumberParser
   class Country
     attr_reader :country_code, :national_prefix, :national_prefix_formatting_rule,
                 :national_prefix_for_parsing, :national_prefix_transform_rule, :international_prefix,
@@ -56,7 +56,7 @@ module TelephoneNumber
       data_file = "#{File.dirname(__FILE__)}/../../data/telephone_number_data_file.dat"
       main_data = Marshal.load(File.binread(data_file))
       override_data = {}
-      override_data = Marshal.load(File.binread(TelephoneNumber.override_file)) if TelephoneNumber.override_file
+      override_data = Marshal.load(File.binread(TelephoneNumberParser.override_file)) if TelephoneNumberParser.override_file
       return main_data.deep_deep_merge!(override_data)
     end
 

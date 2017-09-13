@@ -1,6 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
-require 'telephone_number'
+require 'telephone_number_parser'
 
 Rake::TestTask.new(:test) do |t|
   t.libs << 'test'
@@ -14,13 +14,13 @@ task :default => :test
 namespace :data do
   namespace :main do
     task :import  do
-      TelephoneNumber::DataImporter.new(File.expand_path('data/telephone_number_data_file.xml')).import!
+      TelephoneNumberParser::DataImporter.new(File.expand_path('data/telephone_number_data_file.xml')).import!
     end
   end
 
   namespace :test do
     task :import  do
-      TelephoneNumber::TestDataGenerator.import!
+      TelephoneNumberParser::TestDataGenerator.import!
     end
   end
 end

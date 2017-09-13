@@ -1,17 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'telephone_number/version'
+require 'telephone_number_parser/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'telephone_number'
-  spec.version       = TelephoneNumber::VERSION
-  spec.author        = 'MOBI Wireless Management'
-  spec.email         = ['adam.fernung@mobiwm.com', 'josh.wetzel@mobiwm.com']
-  spec.summary       = 'Phone number validation'
-  spec.homepage      = 'https://github.com/mobi/telephone_number'
+  spec.name          = 'telephone_number_parser'
+  spec.version       = TelephoneNumberParser::VERSION
+  spec.author        = 'LeadMachine (forked from MOBI Wireless Management)'
+  spec.email         = ['jakcharlton@gmail.com']
+  spec.summary       = 'Phone number validation forked from MOBI Wireless Management'
+  spec.homepage      = 'https://github.com/leamachineapp/telephone_number_parser'
   spec.license       = 'MIT'
-
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
